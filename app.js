@@ -1,23 +1,8 @@
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
 
-const UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    username: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-        min: 8
-    },
-}, {
-    timestamps: true
-});
+app.use(morgan('combined'));
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = app;
