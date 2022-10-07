@@ -1,0 +1,27 @@
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin123"
+}
+
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzNmODg1YzkyYmIyYTZlNDZjNDU1NGMiLCJpYXQiOjE2NjUxMDgwNjAsImV4cCI6MTY2NzcwMDA2MH0.w2NzqQk0SYAZZL-Mc7obDf2f44CXQZ2le-USsyszIzI
+
+
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin123"
+}
+
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzNmODg1YzkyYmIyYTZlNDZjNDU1NGMiLCJpYXQiOjE2NjUxMDkyNzMsImV4cCI6MTY2NzcwMTI3M30.hmrNMYDgi9x756fI2WexdX2KaTLTG7H52YJAhzDNWRo
+
+
+
+
