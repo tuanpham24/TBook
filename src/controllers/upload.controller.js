@@ -16,6 +16,7 @@ const upload = async (req, res) => {
                 });
         }
         console.log('file name', req.file.filename)
+        console.log('file name', req.file.path)
         res.status(200).json({
             success: true,
             message: "Uploaded the file successfully: " + req.file.originalname,

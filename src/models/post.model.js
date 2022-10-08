@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     description: {
         type: String,
+        default: '',
         max: 255
     },
     image: {
