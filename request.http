@@ -22,6 +22,25 @@ Content-Type: application/json
 
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzNmODg1YzkyYmIyYTZlNDZjNDU1NGMiLCJpYXQiOjE2NjUxMDkyNzMsImV4cCI6MTY2NzcwMTI3M30.hmrNMYDgi9x756fI2WexdX2KaTLTG7H52YJAhzDNWRo
 
+###
+POST http://localhost:3000/api/post/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzNmODg1YzkyYmIyYTZlNDZjNDU1NGMiLCJpYXQiOjE2NjUxMDkyNzMsImV4cCI6MTY2NzcwMTI3M30.hmrNMYDgi9x756fI2WexdX2KaTLTG7H52YJAhzDNWRo
 
+{
+    "description": "Hello world",
+    "image": "hello.png"
+}
+
+
+###
+POST http://localhost:3000/api/upload/single
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzNmODg1YzkyYmIyYTZlNDZjNDU1NGMiLCJpYXQiOjE2NjUxMDkyNzMsImV4cCI6MTY2NzcwMTI3M30.hmrNMYDgi9x756fI2WexdX2KaTLTG7H52YJAhzDNWRo
+
+{
+    "description": "Hello world 2",
+    "image": "hello.png"
+}
 
 
