@@ -3,7 +3,7 @@ const uploadFile = require("../middlewares/upload.middleware");
 const fs = require("fs");
 const baseUrl = "http://localhost:8080/files/";
 
-const upload = async (req, res) => {
+const upload = async (req, res, next) => {
     try {
         await uploadFile(req, res);
 
@@ -37,7 +37,7 @@ const upload = async (req, res) => {
     }
 };
 
-const getListFiles = (req, res) => {
+const getListFiles = (req, res, next) => {
     const directoryPath = "/resources/static/assets/uploads/";
 
     fs.readdir(directoryPath, function (err, files) {
@@ -65,7 +65,7 @@ const getListFiles = (req, res) => {
     });
 };
 
-const download = (req, res) => {
+const download = (req, res, next) => {
     const fileName = req.params.name;
     const directoryPath = __basedir + "/resources/static/assets/uploads/";
 
@@ -78,7 +78,7 @@ const download = (req, res) => {
     });
 };
 
-const remove = (req, res) => {
+const remove = (req, res, next) => {
     const fileName = req.params.name;
     const directoryPath = __basedir + "/resources/static/assets/uploads/";
 
@@ -95,7 +95,7 @@ const remove = (req, res) => {
     });
 };
 
-const removeSync = (req, res) => {
+const removeSync = (req, res, next) => {
     const fileName = req.params.name;
     const directoryPath = __basedir + "/resources/static/assets/uploads/";
 

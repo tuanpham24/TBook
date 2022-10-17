@@ -5,17 +5,15 @@ const bcrypt = require('bcrypt');
 const { registerValidator } = require('../validations/auth.validations');
 const jwt = require('jsonwebtoken');
 
-const authController = {}
-
 /**
  * @api /api/auth/register
  * @method POST 
  * @description user register
  */
-authController.register = async (req, res, next) => {
+const register = async (req, res, next) => {
     const {name, email, password} = req.body;
 
-    // Check empty
+    // check empty
     if(!name || !email || !password){
         return res
             .status(400)
@@ -24,17 +22,6 @@ authController.register = async (req, res, next) => {
                 message: 'Name, username, password is not valid'
             });
     }
-
-    // validate req.body
-    // const {error} = await registerValidator(req.body);
-    // if(error){
-    //     return res
-    //         .status(422)
-    //         .json({
-    //             success: false,
-    //             message: 'Error validate'
-    //         });
-    // }
 
     // check email existed
     const emailExisted = await User.findOne({email: email});
@@ -48,16 +35,15 @@ authController.register = async (req, res, next) => {
     }
     try {
         const salt = await bcrypt.genSalt(10);
-        const pwdHashed = await bcrypt.hash(password, salt);
+        const hashedPwd = await bcrypt.hash(password, salt);
         const newUser = new User({
             name,
             email,
-            password: pwdHashed,
-            // image
+            password: hashedPwd,
         });
         await newUser.save();
 
-        // make token
+        // create token
         const accessToken = jwt.sign(
             { userId: newUser._id },
             process.env.ACCESS_TOKEN_SECRET,
@@ -83,7 +69,7 @@ authController.register = async (req, res, next) => {
  * @method POST 
  * @description user login
  */
-authController.login = async (req, res, next) => {
+const login = async (req, res, next) => {
     const { email, password } = req.body;
     if(!email || !password){
         return res
@@ -138,4 +124,7 @@ authController.login = async (req, res, next) => {
 }
 
 
-module.exports = authController;
+module.exports = {
+    register,
+    login
+};

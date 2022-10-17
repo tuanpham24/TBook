@@ -2,14 +2,12 @@
 const Post = require('../models/post.model');
 const uploadFile = require("../middlewares/upload.middleware");
 
-const postController = {}
-
 /**
- * @api api/post/create
- * @method POST
- * @description create post by userId
+ * @api /api/post/create
+ * @method POST 
+ * @description user register
  */
-postController.createOne = async (req, res, next) => {
+const createOne = async (req, res, next) => {
     const description = req.body.description;
     console.log('body', req.body); 
     console.log('descr', description); 
@@ -48,11 +46,11 @@ postController.createOne = async (req, res, next) => {
 } 
 
 /**
- * @api api/post/
- * @method GET
+ * @api /api/post/
+ * @method POST 
  * @description get all posts by userId
  */
-postController.getAll = async (req, res, next) => {
+const getAll = async (req, res, next) => {
     try {
         const posts = await Post.find({user: res.locals.userId});
 
@@ -72,12 +70,13 @@ postController.getAll = async (req, res, next) => {
     }
 }
 
+
 /**
  * @api api/post/:id
  * @method GET
  * @description get one post by userId and post id (_id)
  */
- postController.getOne = async (req, res, next) => {
+const getOne = async (req, res, next) => {
     try {
         // console.log('id', req.params.id)
         const post = await Post.findOne({
@@ -106,7 +105,7 @@ postController.getAll = async (req, res, next) => {
  * @method PUT
  * @description update one post by userId and post id (_id)
  */
- postController.updateOne = async (req, res, next) => {
+const updateOne = async (req, res, next) => {
     try {
         const dataUpdate = req.body;
         const post = await Post.findOneAndUpdate(
@@ -136,7 +135,7 @@ postController.getAll = async (req, res, next) => {
  * @method DELETE
  * @description delete one post by userId and post id (_id)
  */
- postController.deleteOne = async (req, res, next) => {
+const deleteOne = async (req, res, next) => {
     try {
         await Post.findByIdAndDelete(
             { user: res.locals.userId, _id: req.params.id }, 
@@ -157,4 +156,10 @@ postController.getAll = async (req, res, next) => {
         })
     }
 }
-module.exports = postController;
+module.exports = {
+    createOne,
+    getAll,
+    getOne,
+    updateOne,
+    deleteOne
+};
