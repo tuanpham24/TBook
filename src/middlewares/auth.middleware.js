@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next){
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = authHeader && authHeader.split(" ")[1];
     if(!token){
         return res
             .status(400)
@@ -15,12 +15,13 @@ function verifyToken(req, res, next){
     }
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        //
         res.locals.userId = decoded.userId;
         next();
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Internal server error'
+            message: 'Internal server error - Auth'
         })
     }
 }

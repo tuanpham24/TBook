@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "TBook back-end: RESTful API with Nodejs/ExpressJS",
+  "description": "TBook back-end: RESTful API with Nodejs/ExpressJS - Node version: 16.15.1",
   "main": "index.js",
   "scripts": {
     "start": "node ./server.js",

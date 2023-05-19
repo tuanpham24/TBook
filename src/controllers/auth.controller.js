@@ -11,10 +11,11 @@ const jwt = require('jsonwebtoken');
  * @description user register
  */
 const register = async (req, res, next) => {
-    const {name, email, password} = req.body;
+    const { name, email, password } = req.body;
 
+    // console.log(req.body);
     // check empty
-    if(!name || !email || !password){
+    if (!name || !email || !password) {
         return res
             .status(400)
             .json({
@@ -24,8 +25,8 @@ const register = async (req, res, next) => {
     }
 
     // check email existed
-    const emailExisted = await User.findOne({email: email});
-    if(emailExisted){
+    const emailExisted = await User.findOne({ email: email });
+    if (emailExisted) {
         return res
             .status(422)
             .json({
@@ -71,7 +72,7 @@ const register = async (req, res, next) => {
  */
 const login = async (req, res, next) => {
     const { email, password } = req.body;
-    if(!email || !password){
+    if (!email || !password) {
         return res
             .status(400)
             .json({
@@ -81,8 +82,8 @@ const login = async (req, res, next) => {
     }
 
     try {
-        const user = await User.findOne({email: email});
-        if(!user){
+        const user = await User.findOne({ email: email });
+        if (!user) {
             return res
                 .status(400)
                 .json({
@@ -93,7 +94,7 @@ const login = async (req, res, next) => {
 
         // check password
         const checkPwd = await bcrypt.compare(password, user.password);
-        if(!checkPwd){
+        if (!checkPwd) {
             return res
                 .status(400)
                 .json({
@@ -123,8 +124,29 @@ const login = async (req, res, next) => {
     }
 }
 
+// /**
+//  * @api /api/auth/editprofile
+//  * @method PUT 
+//  * @description user edit profile
+//  */
+
+// const editProfile = async (req, res, next) => {
+//     try {
+//         const dataUpdated = req.body;
+//         const userUpdated = await User.findOneAndUpdate(
+//             {_id: res.locals.userId},
+//             dataUpdated,
+//             {new: true}
+//         );
+//     } catch (error) {
+        
+//     }
+// }
 
 module.exports = {
     register,
     login
 };
+
+
+

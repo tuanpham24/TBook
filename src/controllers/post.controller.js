@@ -1,32 +1,28 @@
 
 const Post = require('../models/post.model');
-const uploadFile = require("../middlewares/upload.middleware");
+// const uploadFile = require("../middlewares/upload.middleware");
 
 /**
  * @api /api/post/create
  * @method POST 
- * @description user register
+ * @description create post
  */
 const createOne = async (req, res, next) => {
     const description = req.body.description;
-    console.log('body', req.body); 
-    console.log('descr', description); 
-    if(!description && !req.file){
+
+    if(!description){
         return res
             .status(400)
             .json({
                 success: false,
-                message: 'Description or image can not empty'
+                message: 'Description can not empty'
             })
     }
 
     try {
-        await uploadFile(req, res);
-        console.log('file', req.file);
-        const path = req.file.path || '';
         const newPost = new Post({
             description,
-            image: path,
+            // image: path,
             user: res.locals.userId
         });
         await newPost.save();
@@ -47,18 +43,19 @@ const createOne = async (req, res, next) => {
 
 /**
  * @api /api/post/
- * @method POST 
+ * @method GET 
  * @description get all posts by userId
  */
 const getAll = async (req, res, next) => {
     try {
         const posts = await Post.find({user: res.locals.userId});
-
+        // console.log('post', posts)
         return res
             .status(200)
             .json({
                 success: true,
                 message: 'Get post successfully',
+                results: posts.length,
                 posts: posts
             })
 
@@ -113,7 +110,14 @@ const updateOne = async (req, res, next) => {
             dataUpdate,
             { new: true }
         );
-
+        if(!post){
+            return res
+                .status(400)
+                .json({
+                    success: false,
+                    message: 'Post is not found'
+                })
+        }
         return res
             .status(200)
             .json({

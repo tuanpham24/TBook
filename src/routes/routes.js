@@ -11,6 +11,7 @@ function route(app){
     // post routes
     app.use('/api/post', postRouter);
 
+    // upload routes
     app.use('/api/upload', uploadRouter);
 }
 
